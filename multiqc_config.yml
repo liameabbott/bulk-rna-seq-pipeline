@@ -1,0 +1,52 @@
+
+title: 'RNA-Seq Processing Pipeline Report'
+show_analysis_paths: False
+#custom_logo: 'logo.png'
+
+run_modules:
+  - fastp
+  - star
+  - picard
+  - rsem
+  - salmon
+
+module_order:
+  - fastp
+  - star
+  - picard
+  - rsem
+  - salmon
+
+fn_clean_exts:
+  - ".fastp.json"
+  - ".Log.final.out"
+  - ".ReadsPerGene.out.tab"
+  - ".rna_metrics"
+  - ".cnt"
+  - ".Aligned.sortedByCoord.out.bam"
+  - "-salmon"
+
+fastp:
+  fn: "*.fastp.json"
+
+star:
+  fn: "*Log.final.out"
+
+star/genecounts:
+  fn: "*ReadsPerGene.out.tab"
+
+picard/rnaseqmetrics:
+  contents_re: "[Rr]na[Ss]eq[Mm]etrics"
+  contents: "## METRICS CLASS"
+  shared: true
+
+rsem:
+  fn: "*.cnt"
+
+salmon/meta:
+  fn: "*.meta_info.json"
+  content: "salmon_version"
+
+salmon/fld:
+  fn: "*.flenDist.txt"
+
