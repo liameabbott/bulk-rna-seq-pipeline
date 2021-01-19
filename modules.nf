@@ -192,6 +192,28 @@ process quantify_single_reads_rsem {
     --num-threads ${task.cpus} \
     --alignments \
     ${aligned_bam} ${rsem_reference}/reference rsem/${id}
+    
+    awk -v OFS=\$'\\t' '
+        NR==1 {
+            print "transcript_id",
+            "transcript_name",
+            "gene_id",
+            "gene_name",
+            "length",
+            "effective_length",
+            "expected_count",
+            "TPM",
+            "FPKM",
+            "IsoPct"
+        }
+        NR!=1 {
+            split(\$1,a,"_");
+            split(\$2,b,"_");
+            print a[1],a[2],b[1],b[2],\$3,\$4,\$5,\$6,\$7,\$8
+        }
+    ' rsem/${id}.isoforms.results > rsem/${id}.transcripts.results
+    
+    rm rsem/${id}.isoforms.results
     """
 }
 
@@ -223,26 +245,27 @@ process quantify_paired_reads_rsem {
     --alignments \
     --paired-end \
     ${aligned_bam} ${rsem_reference}/reference rsem/${id}
-
-    awk -v OFS=\$'\t' '
+    
+    awk -v OFS=\$'\\t' '
         NR==1 {
-        print "transcript_id",
-        "transcript_name",
-        "gene_id",
-        "gene_name",
-        "length",
-        "effective_length",
-        "expected_count",
-        "TPM",
-        "FPKM",
-        "IsoPct"
-        } 
+            print "transcript_id",
+            "transcript_name",
+            "gene_id",
+            "gene_name",
+            "length",
+            "effective_length",
+            "expected_count",
+            "TPM",
+            "FPKM",
+            "IsoPct"
+        }
         NR!=1 {
-        split(\$1,a,"_");
-        split(\$2,b,"_");
-        print a[1],a[2],b[1],b[2],\$3,\$4,\$5,\$6,\$7,\$8
-        }' rsem/${id}.isoforms.results > rsem/${id}.transcripts.results
-
+            split(\$1,a,"_");
+            split(\$2,b,"_");
+            print a[1],a[2],b[1],b[2],\$3,\$4,\$5,\$6,\$7,\$8
+        }
+    ' rsem/${id}.isoforms.results > rsem/${id}.transcripts.results
+    
     rm rsem/${id}.isoforms.results
     """
 }

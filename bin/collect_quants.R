@@ -22,7 +22,7 @@ if (quant_type == 'salmon') {
     quants, '(.*)\\.quant\\.sf')[,2]
 } else if (quant_type == 'rsem') {
   names(quants) = stringr::str_match(
-    quants, '(.*)\\.isoforms.results')[,2]
+    quants, '(.*)\\.transcripts.results')[,2]
 }
 
 txi.tx = tximport(
