@@ -1,0 +1,13 @@
+{
+    "salmon_version": "1.4.0",
+    "index": "ensembl.102.homo_sapiens.GRCh38.salmon_index",
+    "libType": "A",
+    "output": "SRR3745160-salmon",
+    "mates1": "SRR3745160_1.fastp.fastq.gz",
+    "mates2": "SRR3745160_2.fastp.fastq.gz",
+    "gcBias": [],
+    "seqBias": [],
+    "recoverOrphans": [],
+    "threads": "16",
+    "auxDir": "aux_info"
+}

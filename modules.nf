@@ -130,7 +130,7 @@ process align_single_reads_star {
     tuple val(id), path("star", type: "dir")
 
     """
-    star \
+    STAR \
     --runThreadN ${task.cpus} \
     --genomeDir ${star_index} \
     --readFilesIn ${fastp_fastq} \
@@ -157,7 +157,7 @@ process align_paired_reads_star {
     tuple val(id), path("star", type: "dir")
 
     """
-    star \
+    STAR \
     --runThreadN ${task.cpus} \
     --genomeDir ${star_index} \
     --readFilesIn ${fastp_fastqs} \

@@ -1,0 +1,59 @@
+[2021-02-26 02:22:04.470] [jointLog] [info] setting maxHashResizeThreads to 16
+[2021-02-26 02:22:04.470] [jointLog] [info] Fragment incompatibility prior below threshold.  Incompatible fragments will be ignored.
+[2021-02-26 02:22:04.470] [jointLog] [info] Usage of --validateMappings implies use of minScoreFraction. Since not explicitly specified, it is being set to 0.65
+[2021-02-26 02:22:04.470] [jointLog] [info] Setting consensusSlack to selective-alignment default of 0.35.
+[2021-02-26 02:22:04.470] [jointLog] [info] parsing read library format
+[2021-02-26 02:22:04.470] [jointLog] [info] There is 1 library.
+[2021-02-26 02:22:04.563] [jointLog] [info] Loading pufferfish index
+[2021-02-26 02:22:04.564] [jointLog] [info] Loading dense pufferfish index.
+[2021-02-26 02:22:41.887] [jointLog] [info] done
+[2021-02-26 02:22:41.887] [jointLog] [info] Index contained 182,636 targets
+[2021-02-26 02:22:45.588] [jointLog] [info] Number of decoys : 194
+[2021-02-26 02:22:45.588] [jointLog] [info] First decoy index : 182,398 
+[2021-02-26 02:22:45.763] [jointLog] [info] Computed 657 rich equivalence classes for further processing
+[2021-02-26 02:22:45.763] [jointLog] [info] Counted 773 total reads in the equivalence classes 
+[2021-02-26 02:22:45.766] [jointLog] [warning] 0.2% of fragments were shorter than the k used to build the index.
+If this fraction is too large, consider re-building the index with a smaller k.
+The minimum read size found was 29.
+
+
+[2021-02-26 02:22:45.766] [jointLog] [info] Number of orphans recovered using orphan rescue : 31
+[2021-02-26 02:22:45.766] [jointLog] [info] Number of mappings discarded because of alignment score : 555
+[2021-02-26 02:22:45.766] [jointLog] [info] Number of fragments entirely discarded because of alignment score : 61
+[2021-02-26 02:22:45.766] [jointLog] [info] Number of fragments discarded because they are best-mapped to decoys : 49
+[2021-02-26 02:22:45.766] [jointLog] [info] Number of fragments discarded because they have only dovetail (discordant) mappings to valid targets : 1
+[2021-02-26 02:22:45.789] [jointLog] [warning] Only 773 fragments were mapped, but the number of burn-in fragments was set to 5000000.
+The effective lengths have been computed using the observed mappings.
+
+[2021-02-26 02:22:45.789] [jointLog] [info] Mapping rate = 77.3%
+
+[2021-02-26 02:22:45.789] [jointLog] [info] finished quantifyLibrary()
+[2021-02-26 02:22:45.800] [jointLog] [info] Starting optimizer
+[2021-02-26 02:22:45.870] [jointLog] [info] Marked 0 weighted equivalence classes as degenerate
+[2021-02-26 02:22:45.878] [jointLog] [info] iteration = 0 | max rel diff. = 0.999702
+[2021-02-26 02:22:45.954] [jointLog] [info] iteration 11, adjusting effective lengths to account for biases
+[2021-02-26 02:22:45.764] [fileLog] [info] 
+At end of round 0
+==================
+Observed 1000 total fragments (1000 in most recent round)
+
+[2021-02-26 02:22:46.195] [jointLog] [info] Computed expected counts (for bias correction)
+[2021-02-26 02:22:46.196] [jointLog] [info] processed bias for 3.0% of the transcripts
+[2021-02-26 02:22:46.209] [jointLog] [info] processed bias for 10.2% of the transcripts
+[2021-02-26 02:22:46.234] [jointLog] [info] processed bias for 20.5% of the transcripts
+[2021-02-26 02:22:46.253] [jointLog] [info] processed bias for 30.3% of the transcripts
+[2021-02-26 02:22:46.270] [jointLog] [info] processed bias for 40.1% of the transcripts
+[2021-02-26 02:22:46.296] [jointLog] [info] processed bias for 50.6% of the transcripts
+[2021-02-26 02:22:46.323] [jointLog] [info] processed bias for 60.3% of the transcripts
+[2021-02-26 02:22:46.347] [jointLog] [info] processed bias for 70.0% of the transcripts
+[2021-02-26 02:22:46.359] [jointLog] [info] processed bias for 80.1% of the transcripts
+[2021-02-26 02:22:46.377] [jointLog] [info] processed bias for 90.7% of the transcripts
+[2021-02-26 02:22:46.440] [jointLog] [info] processed bias for 100.0% of the transcripts
+[2021-02-26 02:22:47.118] [jointLog] [info] iteration = 100 | max rel diff. = 4.42991e-14
+[2021-02-26 02:22:47.147] [jointLog] [info] Finished optimizer
+[2021-02-26 02:22:47.147] [jointLog] [info] writing output 
+
+[2021-02-26 02:22:47.519] [jointLog] [warning] NOTE: Read Lib [[ SRR3745167_1.fastp.fastq.gz, SRR3745167_2.fastp.fastq.gz]] :
+
+Detected a *potential* strand bias > 1% in an unstranded protocol check the file: SRR3745167-salmon/lib_format_counts.json for details
+
