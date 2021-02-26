@@ -40,7 +40,9 @@ extract_field_df = function(field, name, feature_type) {
   id_col = paste(
     substr(feature_type, 1, nchar(feature_type)-1),
     'id', sep='_')
-  colnames(df) = c(id_col, colnames(df)[2:dim(df)[2]])
+  n_samples = dim(df)[2]
+  colnames(df) = c(id_col, colnames(df)[2:n_samples])
+  df = df[,c(id_col, order(colnames(df)[2:n_samples]))]
   write.table(
     df, row.names=FALSE, sep='\t', quote=FALSE,
     file=paste0(
