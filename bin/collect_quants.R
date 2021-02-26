@@ -20,23 +20,32 @@ tx2gene = AnnotationDbi::select(
 if (quant_type == 'salmon') {
   names(quants) = stringr::str_match(
     quants, '(.*)\\.quant\\.sf')[,2]
+  txi.tx = tximport(
+      quants, type='salmon', txIn=TRUE, txOut=TRUE)
 } else if (quant_type == 'rsem') {
   names(quants) = stringr::str_match(
     quants, '(.*)\\.transcripts.results')[,2]
+  importer = function(x) readr::read_tsv(x, progress=FALSE)
+  txi.tx = tximport(
+    quants, type='none', txIn=TRUE, txOut=TRUE, importer=importer,
+    geneIdCol='gene_id', txIdCol='transcript_id', abundanceCol='TPM',
+    countsCol='expected_count', lengthCol='effective_length')
 }
-
-txi.tx = tximport(
-  quants, type=quant_type, txIn=TRUE, txOut=TRUE)
 
 txi.gene = summarizeToGene(
   txi.tx, tx2gene, ignoreTxVersion=TRUE)
 
 extract_field_df = function(field, name, feature_type) {
   df = rownames_to_column(data.frame(field))
-  colnames(df) = c('transcript_id', colnames(df)[2:dim(df)[2]])
+  id_col = paste(
+    substr(feature_type, 1, nchar(feature_type)-1),
+    'id', sep='_')
+  colnames(df) = c(id_col, colnames(df)[2:dim(df)[2]])
   write.table(
     df, row.names=FALSE, sep='\t', quote=FALSE,
-    file=paste0(dataset_name, '.', quant_type, '.', feature_type, '.', name, '.tximport.tsv'))
+    file=paste0(
+      dataset_name, '.', quant_type, '.',
+      feature_type, '.', name, '.tximport.tsv'))
 }
 
 extract_field_df(txi.tx$length, 'effective_length', 'transcripts')
