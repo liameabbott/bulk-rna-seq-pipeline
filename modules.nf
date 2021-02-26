@@ -1,5 +1,6 @@
 
 process clean_single_reads_fastp {
+    label "lrg"
     publishDir "${params.output_directory}/${id}/qc", \
         mode: "copy", overwrite: true, \
         pattern: "*.fastp.{json,html}"
@@ -21,6 +22,7 @@ process clean_single_reads_fastp {
 }
 
 process clean_paired_reads_fastp {
+    label "lrg"
     publishDir "${params.output_directory}/${id}/qc", \
         mode: "copy", overwrite: true, \
         pattern: "*.fastp.{json,html}"
@@ -45,6 +47,7 @@ process clean_paired_reads_fastp {
 }
 
 process quantify_single_reads_salmon {
+    label "lrg"
     publishDir "${params.output_directory}/${id}", \
         mode: "copy", overwrite: true, \
         saveAs: { filename -> "salmon" }
@@ -79,6 +82,7 @@ process quantify_single_reads_salmon {
 }
 
 process quantify_paired_reads_salmon {
+    label "lrg"
     publishDir "${params.output_directory}/${id}", \
         mode: "copy", overwrite: true, \
         saveAs: { filename -> "salmon" }
@@ -114,6 +118,7 @@ process quantify_paired_reads_salmon {
 }
 
 process align_single_reads_star {
+    label "lrg"
     publishDir "${params.output_directory}/${id}", \
         mode: "copy", overwrite: true
 
@@ -125,7 +130,7 @@ process align_single_reads_star {
     tuple val(id), path("star", type: "dir")
 
     """
-    STAR \
+    star \
     --runThreadN ${task.cpus} \
     --genomeDir ${star_index} \
     --readFilesIn ${fastp_fastq} \
@@ -140,6 +145,7 @@ process align_single_reads_star {
 }
 
 process align_paired_reads_star {
+    label "lrg"
     publishDir "${params.output_directory}/${id}", \
         mode: "copy", overwrite: true
 
@@ -151,7 +157,7 @@ process align_paired_reads_star {
     tuple val(id), path("star", type: "dir")
 
     """
-    STAR \
+    star \
     --runThreadN ${task.cpus} \
     --genomeDir ${star_index} \
     --readFilesIn ${fastp_fastqs} \
@@ -166,6 +172,7 @@ process align_paired_reads_star {
 }
 
 process quantify_single_reads_rsem {
+    label "lrg"
     publishDir "${params.output_directory}/${id}", \
         mode: "copy", overwrite: true
 
@@ -218,6 +225,7 @@ process quantify_single_reads_rsem {
 }
 
 process quantify_paired_reads_rsem {
+    label "lrg"
     publishDir "${params.output_directory}/${id}", \
         mode: "copy", overwrite: true
 
@@ -271,6 +279,7 @@ process quantify_paired_reads_rsem {
 }
 
 process compute_qc_metrics_picard {
+    label "lrg"
     publishDir "${params.output_directory}/${id}/qc", \
         mode: "copy", overwrite: true
 
@@ -301,6 +310,8 @@ process compute_qc_metrics_picard {
 }
 
 process count_genes_with_reads {
+    label "lrg"
+
     input:
     tuple val(id), val(strand), path(star_reads_per_gene)
 
@@ -333,6 +344,7 @@ process count_genes_with_reads {
 }
 
 process merge_qc_metrics {
+    label "lrg"
     publishDir "${params.output_directory}/${id}/qc", \
         mode: "copy", overwrite: true
 
@@ -377,6 +389,7 @@ process merge_qc_metrics {
 }
 
 process collect_salmon_quants {
+    label "lrg"
     publishDir "${params.output_directory}/summary", \
         mode: "copy", overwrite: true
 
@@ -397,6 +410,7 @@ process collect_salmon_quants {
 }
 
 process collect_rsem_quants {
+    label "lrg"
     publishDir "${params.output_directory}/summary", \
         mode: "copy", overwrite: true
 
@@ -417,6 +431,7 @@ process collect_rsem_quants {
 }
 
 process collect_qc_metrics {
+    label "lrg"
     publishDir "${params.output_directory}/summary", \
         mode: "copy", overwrite: true
 
@@ -449,6 +464,7 @@ process collect_qc_metrics {
 }
 
 process generate_multiqc_report {
+    label "lrg"
     publishDir "${params.output_directory}/summary", \
         mode: "copy", overwrite: true
 

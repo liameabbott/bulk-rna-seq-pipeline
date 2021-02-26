@@ -1,0 +1,18 @@
+name: bulk-rna-seq-pipeline
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - salmon=1.4.0
+  - fastp=0.20.1
+  - star=2.7.8a
+  - picard-slim=2.25.0
+  - rsem=1.3.3
+  - multiqc=1.9
+  - r-dplyr
+  - r-readr
+  - r-tibble
+  - bioconductor-tximport
+  - bioconductor-GenomicFeatures
+  - jq=1.6
