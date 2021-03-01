@@ -298,7 +298,7 @@ process compute_qc_metrics_picard {
         *  ) strand=NONE;;
     esac
 
-    picard CollectRnaSeqMetrics \
+    picard -Xmx10g CollectRnaSeqMetrics \
     --INPUT ${star_genome_bam} \
     --OUTPUT ${id}.rna_metrics \
     --REF_FLAT ${ref_flat} \
