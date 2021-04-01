@@ -17,7 +17,8 @@ process clean_single_reads_fastp {
     --out1 ${id}.fastp.fastq.gz \
     --json ${id}.fastp.json \
     --html ${id}.fastp.html \
-    --thread ${task.cpus}   
+    --thread ${task.cpus} \
+    --qualified_quality_phred 20
     """
 }
 
@@ -42,7 +43,8 @@ process clean_paired_reads_fastp {
     --detect_adapter_for_pe \
     --json ${id}.fastp.json \
     --html ${id}.fastp.html \
-    --thread ${task.cpus}
+    --thread ${task.cpus} \
+    --qualified_quality_phred 20
     """
 }
 
