@@ -16,3 +16,4 @@ dependencies:
   - picard-slim=2.25.1
   - multiqc=1.10.1
   - jq=1.6
+  - tbb=2020.3
