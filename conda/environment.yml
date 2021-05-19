@@ -4,6 +4,9 @@ channels:
   - bioconda
   - defaults
 dependencies:
+  - sra-tools=2.11.0
+  - nextflow=21.0.4
+  - python=3.9.2
   - r-base=4.0.2
   - r-dplyr=1.0.4
   - r-readr=1.5.0
