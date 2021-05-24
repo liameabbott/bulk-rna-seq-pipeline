@@ -32,8 +32,22 @@ screen -a
 ```
 ./scripts/copy-sra-fastqs.sh PRJNA327986
 ```
-   This script will download SRA files to `/efs/bioinformatics/sra/cache` and converted FASTQ files will be written to `/efs/bioinformatics/sra/<project-id>` (e.g. `/efs/bioinformatics/sra/PRJNA327986`).
+   This script will download SRA files to `/efs/bioinformatics/sra/cache` and converted FASTQ files will be written to `/efs/bioinformatics/sra/<project-id>/fastqs/` (e.g. `/efs/bioinformatics/sra/PRJNA327986/fastqs/`).
    
    Note that this step does not need to be run from the cluster head node -- it could also be run from the `bio-dev` server.
 
-5. sdf
+5. Make sure you are logged in to the Slurm cluster head node and that you are in a `screen` or `tmux` session. Then, run the pipeline with default reference database settings (Ensembl, release 102, Homo sapiens, GRCh38 reference files) for a given project using the script `scripts/run-bulk-rna-seq-pipeline.sh`:
+```
+./scripts/run-bulk-rna-seq-pipeline.sh PRJNA327986
+```
+
+   The full Nextflow command run by this runner script is:
+   ```
+   /shared/software/nextflow run main.nf -latest -profile conda,slurm \
+   --dataset_name PRJNA327986 \
+   --fastq_directory /efs/bioinformatics/sra/PRJNA327986/fastqs \
+   --output_directory /efs/bioinformatics/sra/PRJNA327986/processed-data
+   ```
+
+   The `-profile conda,slurm` argument tells the pipeline to use the conda environment defined by `conda/environment.yml` and to distribute the work over cores in the Slurm cluster.
+    
