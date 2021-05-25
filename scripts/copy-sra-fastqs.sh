@@ -10,8 +10,8 @@ fi
 
 cd "${sra_dir}"
 
-esearch -db sra -query $sra_id | \
-efetch -format runinfo | \
+/shared/software/bin/esearch -db sra -query $sra_id | \
+/shared/software/bin/efetch -format runinfo | \
 tr ',' '\t' > "${sra_id}.accessions_metadata.tsv"
 
 grep -E "^SRR" "${sra_id}.accessions_metadata.tsv" | \
