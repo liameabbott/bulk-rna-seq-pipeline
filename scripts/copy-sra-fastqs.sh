@@ -18,8 +18,8 @@ tr ',' '\t' > "${sra_id}.accessions_metadata.tsv"
 grep -E "^SRR" "${sra_id}.accessions_metadata.tsv" | \
 cut -f1 | \
 xargs -L 1 -I {} sh -c '
-    prefetch --max-size u --progress {};
-    vdb-validate {} &> {}.prefetch_check;
+    /shared/software/bin/prefetch --max-size u --progress {};
+    /shared/software/bin/vdb-validate {} &> {}.prefetch_check;
     if grep -q "err" {}.prefetch_check; then
         touch {}.prefetch_failed;
     else
@@ -27,8 +27,8 @@ xargs -L 1 -I {} sh -c '
         if ls {}*fastq.gz >/dev/null 2>&1; then
 	    :
 	else
-	    fasterq-dump --force --split-3 --skip-technical --print-read-nr {};
-            gzip {};
+	    /shared/software/bin/fasterq-dump --force --split-3 --skip-technical --print-read-nr {};
+	    gzip {};
 	fi
     fi
     rm {}.prefetch_check;
