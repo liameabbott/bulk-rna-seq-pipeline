@@ -36,6 +36,12 @@ screen -a
    
    Note that this step does not need to be run from the cluster head node -- it could also be run from the `bio-dev` server.
 
+4.1 Check if a single GSM sample mapped to multiple SRR IDs (In the experiment, the same sample run in multple lanes of a flow cell)
+```
+./scripts/check-repeat.py PRJNA327986 
+```
+    This script will merge multiple .fastq.gz files mapped to a single GSM ID into a single .fastq.gz
+
 5. Make sure you are logged in to the Slurm cluster head node and that you are in a `screen` or `tmux` session. Then, run the pipeline with default reference database settings (Ensembl, release 102, Homo sapiens, GRCh38 reference files) for a given project using the script `scripts/run-bulk-rna-seq-pipeline.sh`:
 ```
 ./scripts/run-bulk-rna-seq-pipeline.sh PRJNA327986

@@ -28,7 +28,7 @@ xargs -L 1 -I {} sh -c '
 	    :
 	else
 	    /shared/software/bin/fasterq-dump --force --split-3 --skip-technical --print-read-nr {};
-	    gzip {};
+	    gzip *.fastq;
 	fi
     fi
     rm {}.prefetch_check;
